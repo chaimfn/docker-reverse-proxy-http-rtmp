@@ -1,10 +1,10 @@
 # Intro:
 Here is an example of reverse-proxy to some web-apps, all on docker. <br />
 We running some apps as docker-containers without public ports, and publishing them by reverse-proxy (nginx), which is a docker-container too. <br />
-The reverse-proxy is published as ssl (with self-signd-certificate), and so does each app behind it. <br />
-Each app is published (by reverse-proxy) with its domain. And because of that, with its ssl-cert (self-signd). <br />
+The reverse-proxy is published as ssl (with self-signd-certificate).<br />
+In this example, the reverse-proxy routing is based on domain names.<br />
 All docker containers (in this example) are going to communicate each other by internal DNS names (instead of IPs), and so the reverse-proxy config.<br />
-This is possible because of using common-network, see ```compose.yaml``` file, first code-block.
+This is possible because of using common-network, see ```compose.yaml``` file, lines 1, 12, 18 and 26.
 
 # Steps:
 
@@ -22,14 +22,15 @@ Expected: ```[+] Running 3/0```
 ### 2. Check:
 We are going to check by 'curl'. <br />
 But first, your OS must to know the domains we're using, and to know the public-certificate the nginx is published by. <br />
-Therfor:
 
-#### Add host:
+#### Therfor:
+
+#### 1. Add host:
 Add this line to end of ```/etc/hosts``` file:
 
 ```127.0.0.1	localhost nginx.docker.local express.docker.local```
 
-#### Install SSL-Cert:
+#### 2. Install SSL-Cert:
 1. ```sudo cp ./reverse-proxy-server/docker.local.crt /usr/local/share/ca-certificates/```
 2. ```sudo update-ca-certificates```
 
