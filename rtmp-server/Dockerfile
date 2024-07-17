@@ -36,13 +36,15 @@ RUN ./configure \
 RUN ln -sf /dev/stdout /var/log/nginx/access.log && \
     ln -sf /dev/stderr /var/log/nginx/error.log
 
-## Add 'nginx.conf' file, who contains the 'rtmp' config section
+## Add 'nginx.conf' file, who contains the 'stream' config section that references to rtmp.conf file
 ADD nginx.conf /etc/nginx/nginx.conf
+## Add 'rtmp.conf' file, who contains the 'rtmp' config section
+ADD rtmp.conf /etc/nginx/rtmp.conf
 
 ## Create directory for the records, and give correct permissions
-RUN mkdir /tmp/record
+RUN mkdir /tmp/records
 RUN chown -R nobody:nogroup /tmp/record
-RUN chmod -R 700 /tmp/record
+RUN chmod -R 700 /tmp/records
 
 ## Remove unnecessary build files
 WORKDIR /
