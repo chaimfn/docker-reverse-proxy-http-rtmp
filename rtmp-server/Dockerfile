@@ -39,7 +39,7 @@ RUN ln -sf /dev/stdout /var/log/nginx/access.log && \
 ## Add 'nginx.conf' file, who contains the 'stream' config section that references to rtmp.conf file
 ADD nginx.conf /etc/nginx/nginx.conf
 ## Add 'rtmp.conf' file, who contains the 'rtmp' config section
-ADD rtmp.conf /etc/nginx/rtmp.conf
+ADD rtmp.conf /etc/nginx/conf.d/rtmp.conf
 
 ## Create directory for the records, and give correct permissions
 RUN mkdir /tmp/records
